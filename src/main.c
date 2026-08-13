@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "bank.h"
+#include "sharedFunctions.h"
 
 int main(void)
 {
