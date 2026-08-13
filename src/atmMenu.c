@@ -1,50 +1,53 @@
-#include "bank.h"
-#include <stdio.h>
-
-
-void atmMenu(Account *currentAccount)
+void atmMenu(Account *account)
 {
     int choice;
+    void (*operation)(Account *);
 
-    void (*operations[])() = {
-        checkBalance,
-        deposit,
-        withdraw,
-        sessionSummary
-    };
-
-    while (1)
+    do
     {
         printf("\n========================================\n");
-        printf("        MINI BANKING & ATM SYSTEM\n");
+        printf("       MINI BANKING & ATM SYSTEM\n");
         printf("========================================\n");
+        printf("Account number: %s\n", account->accountNumber);
+        printf("Welcome, %s!\n", account->name);
 
-        printf("Account number: %s\n", currentAccount->accountNumber);
-        printf("PIN: %s\n", currentAccount->pin);
-        printf("\nWelcome, %s!\n\n", currentAccount->name);
-
-        printf("1. Check Balance\n");
+        printf("\n1. Check Balance\n");
         printf("2. Deposit\n");
         printf("3. Withdraw\n");
         printf("4. Session Summary\n");
         printf("5. Logout\n");
 
-        printf("\nChoose Option's Number : ");
+        printf("Choose: ");
         scanf("%d", &choice);
 
-        if (choice == 5)
+        switch (choice)
         {
-            printf("Logged out successfully.\n");
-            break;
+            case 1:
+                showBalance(account);
+                break;
+
+            case 2:
+                operation = deposit;
+                operation(account);
+                break;
+
+            case 3:
+                operation = withdraw;
+                operation(account);
+                break;
+
+            case 4:
+                showSummary(account);
+                break;
+
+            case 5:
+                showSummary(account);
+                printf("Thank you for using our ATM.\n");
+                break;
+
+            default:
+                printf("Invalid choice. Try again.\n");
         }
 
-        if (choice >= 1 && choice <= 4)
-        {
-            operations[choice - 1]();
-        }
-        else
-        {
-            printf("Invalid choice. Please try again.\n");
-        }
-    }
+    } while (choice != 5);
 }
