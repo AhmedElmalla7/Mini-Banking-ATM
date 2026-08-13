@@ -19,9 +19,9 @@ void atmMenu(Account *currentAccount)
         printf("        MINI BANKING & ATM SYSTEM\n");
         printf("========================================\n");
 
-        printf("Account number: 1001\n");
-        printf("PIN: 1234\n");
-        printf("\nWelcome, Sara Ahmed!\n\n");
+        printf("Account number: %s\n", currentAccount->accountNumber);
+        printf("PIN: %s\n", currentAccount->pin);
+        printf("\nWelcome, %s!\n\n", currentAccount->name);
 
         printf("1. Check Balance\n");
         printf("2. Deposit\n");
