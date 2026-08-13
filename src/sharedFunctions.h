@@ -2,7 +2,9 @@
 #define ACCOUNT_H
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
+#include <conio.h>
 #include "STD_TYPES.h"
 #define ACCOUNT_COUNT 3
 
@@ -25,7 +27,8 @@ typedef struct {
 // Function prototypes
 
 // Auth function
-Account *login(Account *list[], int count); 
+void readPinAsStars(u8 *pinBuf, u32 maxLen);
+Account *login(Account *list[], u32 count); 
 
 // transaction functions
 void showBalance(const Account *account); 
