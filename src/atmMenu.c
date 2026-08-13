@@ -1,3 +1,7 @@
+#include "bank.h"
+#include <stdio.h>
+
+
 void atmMenu(Account *account)
 {
     int choice;
