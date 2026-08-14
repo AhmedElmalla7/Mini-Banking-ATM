@@ -4,7 +4,10 @@
 #include <stdio.h>
 #include <string.h>
 #include "STD_TYPES.h"
-#define ACCOUNT_COUNT 3
+#define ACCOUNT_COUNT 10
+
+s32 activeCount = 3;
+
 
 typedef enum { 
     SAVINGS, 
