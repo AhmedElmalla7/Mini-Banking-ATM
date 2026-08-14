@@ -3,55 +3,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
-
-s32 activeCount = 3;
-void signUp(Account *accountPointers[], s32 *userCount, Account accounts[]);
-void readPinAsStars(u8 *pinBuf, u32 maxLen);
-u32 ignoreCaseComp(const u8 *s1, const u8 *s2);
-int main(void)
-{
-    //
-
-    // intialize accounts
-    Account accounts[ACCOUNT_COUNT] = {
-        {"1234", "1001", "Sara Ahmed", SAVINGS, 5000.0f, 0, 0},
-        {"5678", "1002", "Omar Ali", CURRENT, 3500.0f, 0, 0},
-        {"4321", "1003", "Mona Adel", SAVINGS, 7200.0f, 0, 0}};
-
-    // a pointer array that refers to accounts
-    Account *accountPointers[ACCOUNT_COUNT];
-
-    for (int i = 0; i < ACCOUNT_COUNT; i++)
-    {
-        accountPointers[i] = &accounts[i];
-    }
-    signUp(accountPointers, &activeCount, accounts);
-    // just to depug
-    printf("\n\n==========================================\n");
-    printf("        SYSTEM DATABASE CHECK             \n");
-    printf("==========================================\n");
-
-    for (int i = 0; i < activeCount; i++)
-    {
-        printf("\n--- ACCOUNT %d ---\n", i + 1);
-
-        // 1. Printing from the heavy struct array (using the dot '.')
-        printf("[From Struct Array]\n");
-        printf("Name   : %s\n", accounts[i].name);
-        printf("Acc #  : %s\n", accounts[i].accountNumber);
-        printf("PIN    : %s\n", accounts[i].pin);
-        printf("Type   : %d\n", accounts[i].type);
-        printf("Balance: $%u\n", accounts[i].balance);
-
-        // 2. Printing from the pointer array (using the arrow '->')
-        printf("\n[From Pointer Array]\n");
-        printf("Name   : %s\n", accountPointers[i]->name);
-        printf("Balance: $%u\n", accountPointers[i]->balance);
-    }
-    printf("\n==========================================\n");
-
-    return 0;
-}
+u32 activeCount = 3;
 
 void signUp(Account *accountPointers[], s32 *userCount, Account accounts[])
 {
@@ -199,37 +151,6 @@ void signUp(Account *accountPointers[], s32 *userCount, Account accounts[])
     (*userCount)++;
 }
 // this should hide the pin
-void readPinAsStars(u8 *pinBuf, u32 maxLen)
-{
-    u32 i = 0;
-    u8 ch;
-
-    while (1)
-    {
-        ch = getchar();
-
-        if (ch == '\r' || ch == '\n')
-        {
-            pinBuf[i] = '\0';
-            printf("\n");
-            break;
-        }
-        else if (ch == '\b' || ch == 8)
-        {
-            if (i > 0)
-            {
-                i--;
-                printf("\b \b");
-            }
-        }
-        else if (i < maxLen - 1)
-        {
-            pinBuf[i] = ch;
-            i++;
-            printf("*");
-        }
-    }
-}
 u32 ignoreCaseComp(const u8 *s1, const u8 *s2)
 {
     if (s1 == NULL || s2 == NULL)

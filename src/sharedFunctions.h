@@ -2,17 +2,23 @@
 #define ACCOUNT_H
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
+//#include <conio.h>
 #include "STD_TYPES.h"
 #define ACCOUNT_COUNT 10
-
-s32 activeCount = 3;
 
 
 typedef enum { 
     SAVINGS, 
     CURRENT 
 } AccountType; 
+
+typedef enum { 
+    SIGNIN=1, 
+    SIGNUP,
+    EXIT 
+} MainOperation;
 
 
 typedef struct {  
@@ -28,7 +34,8 @@ typedef struct {
 // Function prototypes
 
 // Auth function
-Account *login(Account *list[], int count); 
+void readPinAsStars(u8 *pinBuf, u32 maxLen);
+Account *login(Account *list[], u32 count); 
 
 // transaction functions
 void showBalance(const Account *account); 
@@ -40,5 +47,8 @@ void showSummary(const Account *account);
 
 // atmMenu function
 void atmMenu(Account *account);
+//signup
+void signUp(Account *accountPointers[], s32 *userCount, Account accounts[]);
+u32 ignoreCaseComp(const u8 *s1, const u8 *s2);
 
 #endif 
