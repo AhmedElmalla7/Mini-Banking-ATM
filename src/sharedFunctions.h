@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <conio.h>
+#include <ctype.h>
 #include "STD_TYPES.h"
 #define ACCOUNT_COUNT 10
 
@@ -33,6 +34,9 @@ typedef struct
 } Account;
 
 // Function prototypes
+
+// clear screen function
+void clearScreen(void);
 
 // Auth function
 void readPinAsStars(u8 *pinBuf, u32 maxLen);

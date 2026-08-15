@@ -8,6 +8,8 @@ void atmMenu(Account *account)
 
     do
     {
+        clearScreen();
+
         // Blue borders and a Cyan title
         printf("\n\033[1;34m========================================\033[0m\n");
         printf("\033[1;36m       MINI BANKING & ATM SYSTEM        \033[0m\n");
@@ -36,26 +38,41 @@ void atmMenu(Account *account)
         switch (choice)
         {
         case 1:
+            clearScreen();
             showBalance(account);
+            printf("\nPress any key to continue...");
+            _getch();
             break;
 
         case 2:
+            clearScreen();
             operation = deposit;
             operation(account);
+            printf("\nPress any key to continue...");
+            _getch();
             break;
 
         case 3:
+            clearScreen();
             operation = withdraw;
             operation(account);
+            printf("\nPress any key to continue...");
+            _getch();
             break;
 
         case 4:
+            clearScreen();
             showSummary(account);
+            printf("\nPress any key to continue...");
+            _getch();
             break;
 
         case 5:
+            clearScreen();
             showSummary(account);
-            printf("Thank you for using our ATM.\n");
+            printf("\nThank you for using our ATM.\n");
+            printf("Press any key to return to Main Menu...");
+            _getch();
             break;
 
         default:

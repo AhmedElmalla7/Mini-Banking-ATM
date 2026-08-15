@@ -1,8 +1,5 @@
-#include <stdio.h>
 #include "sharedFunctions.h"
-#include <string.h>
-#include <stdlib.h>
-#include <ctype.h>
+
 u32 activeCount = 3;
 
 void signUp(Account *accountPointers[], s32 *userCount, Account accounts[])
@@ -23,7 +20,7 @@ void signUp(Account *accountPointers[], s32 *userCount, Account accounts[])
 
     // --- 2. INPUT PROMPTS ---
     // Maps to: account.name
-    printf("Please enter your full name: ");
+    printf("Please enter your full name : ");
 
     if (fgets(accounts[*userCount].name, sizeof(accounts[*userCount].name), stdin) != NULL)
     {

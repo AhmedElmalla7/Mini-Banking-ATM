@@ -2,9 +2,13 @@
 
 extern u32 activeCount;
 
+void clearScreen(void)
+{
+    system("cls");
+}
+
 int main(void)
 {
-
     // intialize accounts
     Account accounts[ACCOUNT_COUNT] = {
         {"1234", "1001", "Sara Ahmed", SAVINGS, 5000.0f, 0, 0},
@@ -20,6 +24,8 @@ int main(void)
     }
     while (1)
     {
+        clearScreen();
+        
         u32 mainOp = 0;
         printf("\n\033[1;34m========================================\033[0m\n");
         printf("\033[1;36m       MINI BANKING & ATM SYSTEM        \033[0m\n");

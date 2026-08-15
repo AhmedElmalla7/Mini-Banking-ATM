@@ -59,8 +59,7 @@ void showBalance(const Account *account)
 }
 void showSummary(const Account *account)
 {
-    printf("\nSession summary\n");
-    printf("------------- SESSION SUMMARY -------------\n");
+    printf("\n------------- SESSION SUMMARY -------------\n");
     printf("Customer : %s\n", account->name);
     printf("Deposits completed : %d\n", account->depositCount);
     printf("Withdrawals : %d\n", account->withdrawalCount);

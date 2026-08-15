@@ -34,12 +34,12 @@ void readPinAsStars(u8 *pinBuf, u32 maxLen)
 
 Account *login(Account *list[], u32 count)
 {
+    clearScreen();
+
     u32 numberOfAttempts = 0;
     printf("\n");
     printf("====================================\n");
-
     printf("||              LOGIN             ||\n");
-
     printf("====================================\n");
     while (numberOfAttempts < 3)
     {
