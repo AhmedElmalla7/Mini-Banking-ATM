@@ -32,7 +32,7 @@ void signUp(Account *accountPointers[], s32 *userCount, Account accounts[])
         while (!fullNameStored)
         {
             size_t len = strlen((char *)accounts[*userCount].name);
-            if (!(len > 0 && (char *)accounts[*userCount].name[len - 1] == '\n'))
+            if (!(len > 0 && (char)accounts[*userCount].name[len - 1] == '\n'))
             {
                 // the full name was not stored(no enough space.)
                 s32 characterDelete;
@@ -62,7 +62,7 @@ void signUp(Account *accountPointers[], s32 *userCount, Account accounts[])
     { // Loop stops BEFORE *userCount
         if (ignoreCaseComp(accounts[*userCount].name, accounts[i].name))
         {
-            printf("Get the hell out.\n");
+            printf("User already exists.\n");
             return;
         }
     }
@@ -83,18 +83,29 @@ void signUp(Account *accountPointers[], s32 *userCount, Account accounts[])
     accounts[*userCount].type = accType - 1;
 
     // user balance and settinng the rest of parameeters
-    printf("\nEnter initial deposit amount: $");
     u32 depo;
     // scanf returns 1 if success.
-    u32 depoCheck;
+    u32 depoCheck = 0;
     while (depoCheck != 1)
     {
-        printf("\nEnter initial deposit amount: $");
+        printf("\nEnter initial deposit amount : $");
         depoCheck = scanf("%u", &depo);
-        if (depoCheck == 1)
+        if (depoCheck != 1)
         {
+            printf("Invalid input.\n");
+            depoCheck = 0; // Reset to ensure the loop continues
+        }
+        else if (depo <= 0)
+        {
+            printf("Deposit amount cannot be zero or negative. Please enter a valid amount.\n");
+            depoCheck = 0; // Reset to ensure the loop continues
+        }
+        else
+        {
+            accounts[*userCount].balance = depo;
             break;
         }
+        
         u32 c;
         while ((c = getchar()) != '\n' && c != EOF)
         {
@@ -140,8 +151,16 @@ void signUp(Account *accountPointers[], s32 *userCount, Account accounts[])
     printf("      ACCOUNT CREATED SUCCESSFULLY!       \n");
     printf("==========================================\n");
     printf("Account Name   : %s\n", accounts[*userCount].name);
-    printf("Account Type   : %d\n", accounts[*userCount].type);
-    printf("Account Pin   : %s\n", accounts[*userCount].pin);
+
+    if(accounts[*userCount].type == SAVINGS)
+    {
+        printf("Account Type   : Savings\n");
+    }
+    else
+    {
+        printf("Account Type   : Current\n");
+    }
+    
     printf("Account Number : %s\n", accounts[*userCount].accountNumber); // The system usually generates this!
     printf("Initial Balance: $%u\n", accounts[*userCount].balance);      // Using %u since your balance is a u32
     printf("==========================================\n");
