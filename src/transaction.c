@@ -66,5 +66,4 @@ void showSummary(const Account *account)
     printf("Withdrawals : %d\n", account->withdrawalCount);
     printf("Final balance : EGP %.2u\n", account->balance);
     printf("-------------------------------------------\n");
-    printf("Thank you for using our ATM.\n");
 }
