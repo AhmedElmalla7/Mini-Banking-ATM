@@ -1,7 +1,30 @@
 #include <stdio.h>
 #include "sharedFunctions.h"
 
+Language currentLang = LANG_EN;
 extern u32 activeCount;
+
+void selectLanguage(void)
+{
+    u32 langChoice = 1;
+    printf("\n\033[1;35m========================================\033[0m\n");
+    printf("\033[1;36m       SELECT LANGUAGE / اختر اللغة      \033[0m\n");
+    printf("\033[1;35m========================================\033[0m\n");
+    printf("  \033[1;36m[1]\033[0m English\n");
+    printf("  \033[1;36m[2]\033[0m العربية\n");
+    printf("\033[1;33mChoice: \033[0m");
+    scanf("%u", &langChoice);
+    getchar();
+
+    if (langChoice == 2)
+    {
+        currentLang = LANG_AR;
+    }
+    else
+    {
+        currentLang = LANG_EN;
+    }
+}
 
 int main(void)
 {
@@ -24,12 +47,20 @@ int main(void)
         printf("\n\033[1;34m========================================\033[0m\n");
         printf("\033[1;36m       MINI BANKING & ATM SYSTEM        \033[0m\n");
         printf("\033[1;34m========================================\033[0m\n");
-        printf("\n  \033[1;36m[1]\033[0m \033[1;32mSign In\033[0m\n");
-        printf("  \033[1;36m[2]\033[0m \033[1;36mSign Up\033[0m\n");
-        printf("  \033[1;31m[3]\033[0m \033[1;31mExit\033[0m\n");
-
-        // A yellow prompt asking for their input
-        printf("\n\033[1;33mEnter your choice:\033[0m ");
+       if (currentLang == LANG_EN)
+        {
+            printf("\n  \033[1;36m[1]\033[0m \033[1;32mSign In\033[0m\n");
+            printf("  \033[1;36m[2]\033[0m \033[1;36mSign Up\033[0m\n");
+            printf("  \033[1;31m[3]\033[0m \033[1;31mExit\033[0m\n");
+            printf("\n\033[1;33mEnter your choice:\033[0m ");
+        }
+        else
+        {
+            printf("\n  \033[1;36m[1]\033[0m \033[1;32mتسجيل الدخول\033[0m\n");
+            printf("  \033[1;36m[2]\033[0m \033[1;36mإنشاء حساب جديد\033[0m\n");
+            printf("  \033[1;31m[3]\033[0m \033[1;31mخروج\033[0m\n");
+            printf("\n\033[1;33mأدخل اختيارك:\033[0m ");
+        }
         scanf("%u", &mainOp);
         getchar();
         MainOperation choice = (MainOperation)mainOp;
@@ -46,7 +77,14 @@ int main(void)
             {
                 // exit cause of wrong pin
                 printf("\n========================================\n");
-                printf("       Thank you for chosing bank HsCBN\n");
+               if (currentLang == LANG_EN)
+                {
+                    printf("       Thank you for choosing HsCBN\n");
+                }
+                else
+                {
+                    printf("      شكراً لاختيارك بنك HsCBN\n");
+                }
                 printf("========================================\n");
             }
             break;
@@ -59,7 +97,14 @@ int main(void)
             break;
 
         default:
-            printf("\n Invalid choice");
+            if (currentLang == LANG_EN)
+            {
+                printf("\n Invalid choice");
+            }
+            else
+            {
+                printf("\n اختيار غير صحيح");
+            }
             break;
         }
     }

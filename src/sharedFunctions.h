@@ -20,6 +20,12 @@ typedef enum {
     EXIT 
 } MainOperation;
 
+typedef enum {
+    LANG_EN = 1,
+    LANG_AR
+} Language;
+
+extern Language currentLang;
 
 typedef struct {  
     u8 pin[5]; 
@@ -49,6 +55,7 @@ void showSummary(const Account *account);
 void atmMenu(Account *account);
 //signup
 void signUp(Account *accountPointers[], s32 *userCount, Account accounts[]);
+void selectLanguage(void);
 u32 ignoreCaseComp(const u8 *s1, const u8 *s2);
 
 #endif 
