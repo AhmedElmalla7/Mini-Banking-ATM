@@ -7,7 +7,7 @@ void readPinAsStars(u8 *pinBuf, u32 maxLen)
 
     while (1)
     {
-        ch = getchar(); // important fix it before final edition
+        ch = _getch(); // important fix it before final edition
 
         if (ch == '\r' || ch == '\n')
         {
@@ -37,24 +37,31 @@ Account *login(Account *list[], u32 count)
     u32 numberOfAttempts = 0;
     printf("\n");
     printf("====================================\n");
-    printf("||             LOGIN              ||\n");
+
+    printf("||              LOGIN             ||\n");
+
     printf("====================================\n");
     while (numberOfAttempts < 3)
     {
         u8 enteredPin[5];
         u8 enteredAccountNumber[12];
+
         printf("Enter your account number : ");
+
         scanf("%s", enteredAccountNumber);
         getchar(); // new
 
         printf("Enter your PIN : ");
+
         readPinAsStars((u8 *)enteredPin, 5);
 
         if (strlen((u8 *)enteredPin) != 4 || strlen((u8 *)enteredAccountNumber) != 4)
         {
+
             printf("Invalid input. Please ensure the account number is 4 digits and the PIN is 4 digits.\n");
             numberOfAttempts++;
             printf("You have %d attempts left.\n", 3 - numberOfAttempts);
+
             continue;
         }
 
@@ -70,10 +77,10 @@ Account *login(Account *list[], u32 count)
         numberOfAttempts++;
         if (numberOfAttempts == 3)
         {
+
             printf("You have exceeded the maximum number of login attempts. Exiting the program.\n");
-            // exit(1);
+
             return NULL; // new
-            // exit(1);
         }
 
         printf("Invalid account number or PIN. You have %d attempts left.\n", 3 - numberOfAttempts);
