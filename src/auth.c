@@ -70,8 +70,8 @@ Account *login(Account *list[], u32 count)
                 printf("\nYou have %u login attempts remaining.\n",
                        3 - numberOfAttempts);
 
-                printf("\nPress Enter to continue...");
-                getchar();
+                printf("\nPress any key to continue...");
+                _getch();
             }
 
             continue;
@@ -96,8 +96,8 @@ Account *login(Account *list[], u32 count)
             printf("You have %u login attempts remaining.\n",
                    3 - numberOfAttempts);
 
-            printf("\nPress Enter to try again...");
-            getchar();
+            printf("\nPress any key to try again...");
+            _getch();
         }
     }
 
@@ -112,9 +112,9 @@ Account *login(Account *list[], u32 count)
     printf("For your security, access has been denied.\n");
     printf("Your login session has been terminated.\n");
 
-    printf("\n\033[1;36mPress Enter to continue...\033[0m");
+    printf("\n\033[1;36mPress any key to continue...\033[0m");
 
-    getchar();
+    _getch();
 
     return NULL;
 }

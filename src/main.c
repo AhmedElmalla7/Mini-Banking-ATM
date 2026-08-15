@@ -51,9 +51,13 @@ int main(void)
             }
             else
             {
+
                 printf("\n========================================\n");
-                printf("       Thank you for using our ATM      \n");
+                printf("       LOGIN SESSION ENDED              \n");
                 printf("========================================\n");
+
+                printf("\nPress Enter to return to Main Menu...");
+                getchar();
             }
 
             break;

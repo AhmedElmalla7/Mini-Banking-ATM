@@ -69,9 +69,13 @@ void atmMenu(Account *account)
 
         case 5:
             clearScreen();
+
             showSummary(account);
-            printf("\nThank you for using our ATM.\n");
-            printf("Press any key to return to Main Menu...");
+
+            printf("\n\033[1;32mYou have been logged out successfully.\033[0m\n");
+            printf("Thank you for using our ATM system.\n");
+
+            printf("\n\033[1;33mPress any key to return to Main Menu...\033[0m");
             _getch();
             break;
 

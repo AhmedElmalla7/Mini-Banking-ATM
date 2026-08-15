@@ -1,68 +1,94 @@
 #include "sharedFunctions.h"
+
 void deposit(Account *account)
 {
     s32 deposit_amount = 0;
-    printf("Enter deposit amount:");
+
+    printf("\n\033[1;34m========================================\033[0m\n");
+    printf("\033[1;36m              DEPOSIT                  \033[0m\n");
+    printf("\033[1;34m========================================\033[0m\n");
+
+    printf("\nEnter deposit amount: ");
     scanf("%d", &deposit_amount);
+
     if (deposit_amount > 0)
     {
-        printf("\033[1;32m Deposit successful. \033[0m\n");
         account->balance += (u32)deposit_amount;
         account->depositCount++;
-        printf("New balance: EGP %d \n", account->balance);
+
+        printf("\n\033[1;32mDeposit successful.\033[0m\n");
+        printf("New balance: EGP %u\n", account->balance);
     }
     else
     {
-        printf("\033[1;31m Invalid amount. Enter a value greater than zero.\n \033[0m\n");
-        printf("Current balance: EGP %d \n", account->balance);
+        printf("\n\033[1;31mInvalid amount.\033[0m\n");
+        printf("Enter a value greater than zero.\n");
+        printf("Current balance: EGP %u\n", account->balance);
     }
 }
+
 
 void withdraw(Account *account)
 {
     s32 withdrawal_amount = 0;
-    printf("Enter withdrawal amount:");
+
+    printf("\n\033[1;34m========================================\033[0m\n");
+    printf("\033[1;36m             WITHDRAW                  \033[0m\n");
+    printf("\033[1;34m========================================\033[0m\n");
+
+    printf("\nEnter withdrawal amount: ");
     scanf("%d", &withdrawal_amount);
+
     if (withdrawal_amount > 0)
     {
         if ((u32)withdrawal_amount <= account->balance)
         {
-            printf("withdrawal successful. \n");
             account->balance -= (u32)withdrawal_amount;
             account->withdrawalCount++;
-            printf("New balance: EGP %d \n", account->balance);
+
+            printf("\n\033[1;32mWithdrawal successful.\033[0m\n");
+            printf("New balance: EGP %u\n", account->balance);
         }
         else
         {
-            printf("Withdrawal rejected: insufficient balance. \n");
-            printf("Current balance: EGP %d \n", account->balance);
+            printf("\n\033[1;31mWithdrawal rejected.\033[0m\n");
+            printf("Insufficient balance.\n");
+            printf("Current balance: EGP %u\n", account->balance);
         }
     }
     else
     {
-        printf("Invalid amount. Enter a value greater than zero.\n");
-        printf("Current balance: EGP %d \n", account->balance);
+        printf("\n\033[1;31mInvalid amount.\033[0m\n");
+        printf("Enter a value greater than zero.\n");
+        printf("Current balance: EGP %u\n", account->balance);
     }
 }
 
+
 void showBalance(const Account *account)
 {
-    printf("\n========================================\n");
-    printf("          ATM BALANCE INQUIRY           \n");
-    printf("========================================\n");
+    printf("\n\033[1;34m========================================\033[0m\n");
+    printf("\033[1;36m          ATM BALANCE INQUIRY           \033[0m\n");
+    printf("\033[1;34m========================================\033[0m\n");
 
-    printf(" Account Name: %s\n", account->name);
+    printf("\nAccount Name    : %s\n", account->name);
+    printf("Current Balance : \033[1;32mEGP %u\033[0m\n", account->balance);
 
-    printf(" Current Balance: $%.2u\n", account->balance);
-
-    printf("========================================\n");
+    printf("\n\033[1;34m========================================\033[0m\n");
 }
+
+
 void showSummary(const Account *account)
 {
-    printf("\n------------- SESSION SUMMARY -------------\n");
-    printf("Customer : %s\n", account->name);
-    printf("Deposits completed : %d\n", account->depositCount);
-    printf("Withdrawals : %d\n", account->withdrawalCount);
-    printf("Final balance : EGP %.2u\n", account->balance);
-    printf("-------------------------------------------\n");
+    printf("\n\033[1;34m========================================\033[0m\n");
+    printf("\033[1;36m            SESSION SUMMARY             \033[0m\n");
+    printf("\033[1;34m========================================\033[0m\n");
+
+    printf("\nCustomer            : %s\n", account->name);
+    printf("Deposits completed  : %u\n", account->depositCount);
+    printf("Withdrawals         : %u\n", account->withdrawalCount);
+    printf("Final balance       : \033[1;32mEGP %u\033[0m\n",
+           account->balance);
+
+    printf("\n\033[1;34m========================================\033[0m\n");
 }
