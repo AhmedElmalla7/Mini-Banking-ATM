@@ -38,9 +38,10 @@ Account *login(Account *list[], u32 count)
 
     u32 numberOfAttempts = 0;
     printf("\n");
-    printf("====================================\n");
-    printf("||              LOGIN             ||\n");
-    printf("====================================\n");
+    printf("\n\033[1;34m================================\033[0m\n");
+    printf("\033[1;36m       LOGIN            \033[0m");
+    printf("\n\033[1;34m================================\033[0m\n");
+
     while (numberOfAttempts < 3)
     {
         u8 enteredPin[5];
