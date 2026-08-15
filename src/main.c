@@ -25,7 +25,7 @@ int main(void)
     while (1)
     {
         clearScreen();
-        
+
         u32 mainOp = 0;
         printf("\n\033[1;34m========================================\033[0m\n");
         printf("\033[1;36m       MINI BANKING & ATM SYSTEM        \033[0m\n");
@@ -34,7 +34,7 @@ int main(void)
         printf("\n  \033[1;36m[1]\033[0m \033[1;32mSign In\033[0m\n");
         printf("  \033[1;36m[2]\033[0m \033[1;36mSign Up\033[0m\n");
         printf("  \033[1;31m[3]\033[0m \033[1;31mExit\033[0m\n");
-        printf("\n\033[1;33mEnter your choice:\033[0m ");
+        printf("\n\033[1;33mEnter your choice :\033[0m ");
 
         scanf("%u", &mainOp);
         getchar();
@@ -44,28 +44,46 @@ int main(void)
         case SIGNIN:
         {
             Account *userToLog = login(accountPointers, activeCount);
+
             if (userToLog != NULL)
             {
                 atmMenu(userToLog);
             }
             else
             {
-                // exit cause of wrong pin
                 printf("\n========================================\n");
-                printf("       Thank you for choosing HsCBN\n");
+                printf("       Thank you for using our ATM      \n");
                 printf("========================================\n");
             }
+
             break;
         }
+
         case SIGNUP:
             signUp(accountPointers, &activeCount, accounts);
             break;
+
         case EXIT:
+            clearScreen();
+
+            printf("\n\033[1;34m========================================\033[0m\n");
+            printf("\033[1;36m             GOODBYE!                  \033[0m\n");
+            printf("\033[1;34m========================================\033[0m\n");
+
+            printf("\nThank you for using our ATM system.\n");
+            printf("Have a great day!\n");
+
+            printf("\n\033[1;33mPress Enter to exit...\033[0m");
+            getchar();
+
             return 0;
-            break;
 
         default:
-            printf("\n Invalid choice");
+            printf("\n\033[1;31mInvalid choice.\033[0m\n");
+            printf("Please select a valid option.\n");
+
+            printf("\nPress Enter to continue...");
+            getchar();
             break;
         }
     }

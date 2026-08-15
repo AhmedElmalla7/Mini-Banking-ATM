@@ -34,57 +34,87 @@ void readPinAsStars(u8 *pinBuf, u32 maxLen)
 
 Account *login(Account *list[], u32 count)
 {
-    clearScreen();
-
     u32 numberOfAttempts = 0;
-    printf("\n");
-    printf("\n\033[1;34m================================\033[0m\n");
-    printf("\033[1;36m       LOGIN            \033[0m");
-    printf("\n\033[1;34m================================\033[0m\n");
 
     while (numberOfAttempts < 3)
     {
+        clearScreen();
+
+        printf("\n\033[1;34m========================================\033[0m\n");
+        printf("\033[1;36m                 LOGIN                  \033[0m\n");
+        printf("\033[1;34m========================================\033[0m\n");
+
+        printf("\n\033[1;33mLogin attempts remaining: %u\033[0m\n\n",
+               3 - numberOfAttempts);
+
         u8 enteredPin[5];
         u8 enteredAccountNumber[12];
 
-        printf("Enter your account number : ");
-
+        printf("\nEnter your account number : ");
         scanf("%s", enteredAccountNumber);
-        getchar(); // new
+        getchar();
 
         printf("Enter your PIN : ");
+        readPinAsStars(enteredPin, 5);
 
-        readPinAsStars((u8 *)enteredPin, 5);
-
-        if (strlen((u8 *)enteredPin) != 4 || strlen((u8 *)enteredAccountNumber) != 4)
+        if (strlen((char *)enteredPin) != 4 ||
+            strlen((char *)enteredAccountNumber) != 4)
         {
-
-            printf("Invalid input. Please ensure the account number is 4 digits and the PIN is 4 digits.\n");
             numberOfAttempts++;
-            printf("You have %d attempts left.\n", 3 - numberOfAttempts);
+
+            printf("\n\033[1;31mInvalid input.\033[0m\n");
+            printf("Account number and PIN must be 4 digits.\n");
+
+            if (numberOfAttempts < 3)
+            {
+                printf("\nYou have %u login attempts remaining.\n",
+                       3 - numberOfAttempts);
+
+                printf("\nPress Enter to continue...");
+                getchar();
+            }
 
             continue;
         }
 
         for (u32 i = 0; i < count; i++)
         {
-            if (strcmp((u8 *)enteredAccountNumber, (u8 *)list[i]->accountNumber) == 0 &&
-                strcmp((u8 *)enteredPin, (u8 *)list[i]->pin) == 0)
+            if (strcmp((char *)enteredAccountNumber,
+                       (char *)list[i]->accountNumber) == 0 &&
+                strcmp((char *)enteredPin,
+                       (char *)list[i]->pin) == 0)
             {
                 return list[i];
             }
         }
 
         numberOfAttempts++;
-        if (numberOfAttempts == 3)
+
+        if (numberOfAttempts < 3)
         {
+            printf("\n\033[1;31mInvalid account number or PIN.\033[0m\n");
+            printf("You have %u login attempts remaining.\n",
+                   3 - numberOfAttempts);
 
-            printf("You have exceeded the maximum number of login attempts. Exiting the program.\n");
-
-            return NULL; // new
+            printf("\nPress Enter to try again...");
+            getchar();
         }
-
-        printf("Invalid account number or PIN. You have %d attempts left.\n", 3 - numberOfAttempts);
     }
-    return NULL; // new
+
+    // Maximum attempts reached
+    clearScreen();
+
+    printf("\n\033[1;34m========================================\033[0m\n");
+    printf("\033[1;31m              ACCESS DENIED             \033[0m\n");
+    printf("\033[1;34m========================================\033[0m\n");
+
+    printf("\nToo many incorrect login attempts.\n");
+    printf("For your security, access has been denied.\n");
+    printf("Your login session has been terminated.\n");
+
+    printf("\n\033[1;36mPress Enter to continue...\033[0m");
+
+    getchar();
+
+    return NULL;
 }
