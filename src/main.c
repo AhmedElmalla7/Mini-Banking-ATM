@@ -36,8 +36,14 @@ int main(void)
         printf("  \033[1;31m[3]\033[0m \033[1;31mExit\033[0m\n");
         printf("\n\033[1;33mEnter your choice :\033[0m ");
 
-        scanf("%u", &mainOp);
-        getchar();
+        if (scanf("%u", &mainOp) != 1)
+        {
+            mainOp = 0; 
+        }
+
+        int characterDelete;
+        while ((characterDelete = getchar()) != '\n' && characterDelete != EOF);
+
         MainOperation choice = (MainOperation)mainOp;
         switch (choice)
         {
@@ -56,8 +62,8 @@ int main(void)
                 printf("       LOGIN SESSION ENDED              \n");
                 printf("========================================\n");
 
-                printf("\nPress Enter to return to Main Menu...");
-                getchar();
+                printf("\nPress any key to continue...");
+                _getch();
             }
 
             break;
@@ -71,14 +77,14 @@ int main(void)
             clearScreen();
 
             printf("\n\033[1;34m========================================\033[0m\n");
-            printf("\033[1;36m             GOODBYE!                  \033[0m\n");
+            printf("\033[1;36m             GOODBYE!                   \033[0m\n");
             printf("\033[1;34m========================================\033[0m\n");
 
             printf("\nThank you for using our ATM system.\n");
             printf("Have a great day!\n");
 
-            printf("\n\033[1;33mPress Enter to exit...\033[0m");
-            getchar();
+            printf("\n\033[1;33mPress any key to exit...\033[0m");
+            _getch();
 
             return 0;
 
@@ -86,8 +92,8 @@ int main(void)
             printf("\n\033[1;31mInvalid choice.\033[0m\n");
             printf("Please select a valid option.\n");
 
-            printf("\nPress Enter to continue...");
-            getchar();
+            printf("\nPress any key to continue...");
+            _getch();
             break;
         }
     }

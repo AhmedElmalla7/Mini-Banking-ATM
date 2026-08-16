@@ -23,54 +23,48 @@ void signUp(Account *accountPointers[], s32 *userCount, Account accounts[])
     clearScreen();
 
     printf("\n\033[1;34m==========================================\033[0m\n");
-    printf("\033[1;36m        ATM SYSTEM - NEW ACCOUNT         \033[0m\n");
+    printf("\033[1;36m         ATM SYSTEM - NEW ACCOUNT         \033[0m\n");
     printf("\033[1;34m==========================================\033[0m\n\n");
 
     // --- 2. INPUT PROMPTS ---
     // Maps to: account.name
-    printf("\033[1;33mPlease enter your full name : \033[0m");
-
-    if (fgets(accounts[*userCount].name,
-              sizeof(accounts[*userCount].name),
-              stdin) != NULL)
+    while (1)
     {
-        s32 fullNameStored = 0;
+        printf("\033[1;33mPlease enter your full name : \033[0m");
 
-        while (!fullNameStored)
+        if (fgets((char *)accounts[*userCount].name, sizeof(accounts[*userCount].name), stdin) == NULL)
         {
-            size_t len = strlen((char *)accounts[*userCount].name);
-
-            if (!(len > 0 &&
-                  (char)accounts[*userCount].name[len - 1] == '\n'))
-            {
-                // the full name was not stored(no enough space.)
-                s32 characterDelete;
-
-                while ((characterDelete = getchar()) != '\n' &&
-                       characterDelete != EOF)
-                {
-                    // empty out the buffer
-                }
-
-                // try again with shorter name
-                printf("\n\033[1;31mName exceeded the limit pleas enter your full name again: \033[0m");
-
-                fgets((char *)accounts[*userCount].name,
-                      sizeof(accounts[*userCount].name),
-                      stdin);
-
-                continue;
-            }
-            else
-            {
-                accounts[*userCount].name[len - 1] = '\0';
-                fullNameStored = 1;
-            }
+            continue;
         }
-    }
-    else
-    {
-        // error if no name provided
+
+        size_t len = strlen((char *)accounts[*userCount].name);
+
+        // إذا كان الاسم طويلاً ولم ينتهي بـ newline (يعني اتبقى حروف في الـ buffer)
+        if (len > 0 && accounts[*userCount].name[len - 1] != '\n')
+        {
+            s32 characterDelete;
+            while ((characterDelete = getchar()) != '\n' && characterDelete != EOF);
+
+            printf("\033[1;31mName exceeded the limit. Please enter your full name again.\033[0m\n\n");
+            continue;
+        }
+
+        // إزالة الـ newline من نهاية الاسم
+        if (len > 0 && accounts[*userCount].name[len - 1] == '\n')
+        {
+            accounts[*userCount].name[len - 1] = '\0';
+            len--;
+        }
+
+        // التحقق من أن الاسم ليس فارغاً
+        if (len == 0)
+        {
+            printf("\033[1;31mName cannot be empty.\033[0m\n\n");
+            continue;
+        }
+
+        // الاسم صحيح وتم تخزينه بنجاح
+        break;
     }
 
     // if user already there.
@@ -211,7 +205,6 @@ void signUp(Account *accountPointers[], s32 *userCount, Account accounts[])
 
     _getch();
 }
-
 
 // this should hide the pin
 u32 ignoreCaseComp(const u8 *s1, const u8 *s2)

@@ -33,7 +33,13 @@ void atmMenu(Account *account)
         // A nice yellow prompt for the user input
         printf("\n\033[1;33mChoose an option:\033[0m ");
 
-        scanf("%d", &choice);
+        if (scanf("%d", &choice) != 1)
+        {
+            choice = 0; 
+        }
+
+        s32 characterDelete;
+        while ((characterDelete = getchar()) != '\n' && characterDelete != EOF);
 
         switch (choice)
         {
